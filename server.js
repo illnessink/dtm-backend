@@ -2,6 +2,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const cors = require('cors');
+const matchesRouter = require('./controllers/matches');
 
 // initialize app
 const app = express();
@@ -21,9 +23,15 @@ db.on('connected', () => console.log('mongo connected'));
 
 // mount middleware
 app.use(morgan("dev"));
+app.use(express.json()); 
+app.use(cors());
 
 // router
+app.get('/', (req, res) => {
+    res.send("DOWN TO MATCH");
+});
 
+app.use('/matches', matchesRouter);
 
 // listener
 const PORT = process.env.PORT;
