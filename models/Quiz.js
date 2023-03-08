@@ -42,10 +42,6 @@ const quizSchema = new Schema({
         type: Boolean,
         required: true,
     },
-    userId: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-    }
 
 }, { timestamps: true });
 
