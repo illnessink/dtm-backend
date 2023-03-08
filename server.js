@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cors = require('cors');
 const matchesRouter = require('./controllers/matches');
+// const Profile = require('./models/Profile')
 
 // initialize app
 const app = express();
@@ -31,7 +32,7 @@ app.get('/', (req, res) => {
     res.send("DOWN TO MATCH");
 });
 
-app.use('/matches', matchesRouter);
+app.use(matchesRouter);
 
 // listener
 const PORT = process.env.PORT;
