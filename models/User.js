@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
     firstName: {
         type: String,
         required: true,
@@ -10,12 +11,14 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
     profile: {
-        type: profileSchema,
+        type: Schema.Types.ObjectId,
+        ref: 'Profile'
     },
     quiz: {
-        type: quizSchema,
+        type: Schema.Types.ObjectId,
+        ref: 'Quiz'
     },
-    matches: [ObjectId],
+    matches: [Schema.Types.ObjectId],
     uid: String,
 
 }, { timestamps: true });
