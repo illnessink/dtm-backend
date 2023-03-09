@@ -37,7 +37,7 @@ router.post("/profiles", async (req, res) => {
 router.put("/profile/:id", async (req, res) => {
   try {
     res.status(200).json(
-      await Person.findByOneAndUpdate({ uid: req.params.id }, req.body, { new: true })
+      await Person.findOneAndUpdate({ uid: req.params.id }, req.body, { new: true })
     );
   } catch (error) {
     res.status(400).json({ message: "something went wrong" });
