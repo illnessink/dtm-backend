@@ -15,6 +15,7 @@ const profileSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
     },
+    uid: String,
 
 }, { timestamps: true });
 

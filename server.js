@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cors = require('cors');
 const matchesRouter = require('./controllers/matches');
+const usersRouter = require('./controllers/users');
 // const Profile = require('./models/Profile')
 
 // initialize app
@@ -33,6 +34,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(matchesRouter);
+app.use(usersRouter);
 
 // listener
 const PORT = process.env.PORT;
