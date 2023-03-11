@@ -75,8 +75,8 @@ app.get('/', isAuthenticated, (req, res) => {
     res.send("DOWN TO MATCH");
 });
 
-app.use(matchesRouter);
-app.use(usersRouter);
+app.use("/matches", isAuthenticated, matchesRouter);
+app.use("/profiles", isAuthenticated,usersRouter);
 
 // listener
 const PORT = process.env.PORT;
