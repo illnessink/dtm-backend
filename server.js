@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const matchesRouter = require('./controllers/matches');
 const usersRouter = require('./controllers/users');
+const fileUpload = require('express-fileupload');
 // const Profile = require('./models/Profile')
 
 // initialize app
@@ -49,6 +50,7 @@ db.on('connected', () => console.log('mongo connected'));
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cors());
+app.use(fileUpload({ createParentPath: true}));
 
 // authorization/authentication middleware
 app.use(async function(req, res, next){
