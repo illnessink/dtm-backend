@@ -8,7 +8,7 @@ const Profile = require('../models/Profile.js');
 // test route
 
 // index
-router.get("/profiles", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         res.status(200).json(await Profile.find({}))
     } catch (error) {
@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
 
 
 // update
-router.put("/profile/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     res.status(200).json(
       await Person.findOneAndUpdate({ uid: req.params.id }, req.body, { new: true })
@@ -43,9 +43,10 @@ router.put("/profile/:id", async (req, res) => {
 });
 
 // show
-router.get("/profiles/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
-        const profile = await Profile.findOne({ uid: req.paramas.id })
+        const profile = await Profile.findOne({ uid: req.params.id })
+        console.log(profile)
         res.status(201).send({ profile })
     } catch (error) {
         res.status(400).json({ message: "something went wrong" });
