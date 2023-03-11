@@ -18,7 +18,7 @@ const { getAuth } = require('firebase-admin/auth');
 
 // config settings
 require('dotenv').config();
-const {DATABASE_URL, GOOGLE_PRIVATE_KEY_ID, GOOGLE_PRIVATE_KEY, GOOGLE_CLIENT_ID } = process.env
+const { DATABASE_URL, GOOGLE_PRIVATE_KEY_ID, GOOGLE_PRIVATE_KEY, GOOGLE_CLIENT_ID } = process.env
 
 
 admin.initializeApp({
