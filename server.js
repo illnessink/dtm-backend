@@ -5,10 +5,17 @@ const morgan = require('morgan');
 const cors = require('cors');
 const matchesRouter = require('./controllers/matches');
 const usersRouter = require('./controllers/users');
+const http = require('http');
+
 // const Profile = require('./models/Profile')
 
 // initialize app
 const app = express();
+
+// io server
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
 
 const admin = require("firebase-admin");
 
@@ -44,6 +51,11 @@ mongoose.connect(DATABASE_URL);
 const db = mongoose.connection;
 db.on('error', (err) => console.log(err.message + 'is mongo not running?'));
 db.on('connected', () => console.log('mongo connected'));
+
+// io connection
+io.on('connection', (socket) => {
+    console.log('a user connected');
+  });
 
 // mount middleware
 app.use(morgan("dev"));
