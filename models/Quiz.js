@@ -3,44 +3,34 @@ const Schema = mongoose.Schema;
 
 const quizSchema = new Schema({
     q1: {
-        type: Boolean,
-        required: true,
+        type: String,
     },
     q2: {
-        type: Boolean,
-        required: true,
+        type: String,
     },
     q3: {
-        type: Boolean,
-        required: true,
+        type: String,
     },
     q4: {
-        type: Boolean,
-        required: true,
+        type: String,
     },
     q5: {
-        type: Boolean,
-        required: true,
+        type: String,
     },
     q6: {
-        type: Boolean,
-        required: true,
+        type: String,
     },
     q7: {
-        type: Boolean,
-        required: true,
+        type: String,
     },
     q8: {
-        type: Boolean,
-        required: true,
-    },
+        type: String,
+    },    
     q9: {
-        type: Boolean,
-        required: true,
+        type: String,
     },
     q10: {
-        type: Boolean,
-        required: true,
+        type: String,
     },
 
 }, { timestamps: true });

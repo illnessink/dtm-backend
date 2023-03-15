@@ -3,8 +3,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cors = require('cors');
-const matchesRouter = require('./controllers/matches');
 const usersRouter = require('./controllers/users');
+const matchesRouter = require('./controllers/matches');
+const quizRouter = require('./controllers/quizzes');
 const http = require('http');
 const fileUpload = require('express-fileupload');
 
@@ -98,7 +99,8 @@ app.get('/', isAuthenticated, (req, res) => {
 });
 
 app.use("/matches", isAuthenticated, matchesRouter);
-app.use("/profiles", isAuthenticated,usersRouter);
+app.use("/profiles", isAuthenticated, usersRouter);
+app.use("/quizzes", isAuthenticated, quizRouter);
 
 // listener
 const PORT = process.env.PORT;
