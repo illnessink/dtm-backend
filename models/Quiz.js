@@ -32,6 +32,7 @@ const quizSchema = new Schema({
     q10: {
         type: String,
     },
+    uid: String,
 
 }, { timestamps: true });
 
