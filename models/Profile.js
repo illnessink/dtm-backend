@@ -10,7 +10,10 @@ const profileSchema = new Schema({
     bio: String,
     funFact: String,
     hobbies: [String],
-    photo: String,
+    photo: {
+        type: String,
+        default: "https://i.imgur.com/56zrFKC.jpg",
+    },
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'User',
