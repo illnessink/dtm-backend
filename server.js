@@ -19,7 +19,7 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: ["http://localhost:3000" /*"https://down-to-match-backend.herokuapp.com" */],
         credentials: true, 
         methods: ["GET", "POST"],
         }
@@ -69,8 +69,16 @@ app.use(fileUpload({ createParentPath: true}));
 // io connection
 io.on('connection', (socket) => {
     console.log('a user connected:' + socket.id);
-    socket.on("send_message", (data) => {
-        socket.broadcast.emit("received_message", data)
+    socket.on("join_room", (data) => {
+        socket.join(data);
+        console.log(`User with ID: ${socket.id} joined room: ${data}`);
+      });
+    
+      socket.on("send_message", (data) => {
+        socket.to(data.room).emit("receive_message", data);
+      });
+    socket.on("disconnect", () => {
+        console.log("user disconnected:" + socket.id)
     })
   });
 
