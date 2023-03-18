@@ -19,7 +19,7 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server, {
     cors: {
-        origin: ["http://localhost:3000" /*"https://down-to-match-backend.herokuapp.com" */],
+        origin: ["http://localhost:3000", "https://downtomatch.netlify.app"],
         credentials: true, 
         methods: ["GET", "POST"],
         }
