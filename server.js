@@ -6,6 +6,7 @@ const cors = require('cors');
 const usersRouter = require('./controllers/users');
 const matchesRouter = require('./controllers/matches');
 const quizRouter = require('./controllers/quizzes');
+const chatRouter = require('./controllers/chats');
 const http = require('http');
 const fileUpload = require('express-fileupload');
 
@@ -67,19 +68,25 @@ app.use(cors());
 app.use(fileUpload({ createParentPath: true}));
 
 // io connection
+global.onlineUsers = new Map();
 io.on('connection', (socket) => {
     console.log('a user connected:' + socket.id);
-    socket.on("join_room", (data) => {
-        socket.join(data);
-        console.log(`User with ID: ${socket.id} joined room: ${data}`);
+    global.chatSocket = socket;
+    socket.on("addUser", (id) => {
+        onlineUsers.set(id, socket.id);
+
       });
     
-      socket.on("send_message", (data) => {
-        socket.to(data.room).emit("receive_message", data);
+      socket.on("send-msg", (data) => {
+        const sendUserSocket = onlineUsers.get(data.to);
+        if(sendUserSocket){
+          socket.to(sendUserSocket).emit("msg-receive", data.message)
+        }
       });
-    socket.on("disconnect", () => {
-        console.log("user disconnected:" + socket.id)
-    })
+
+    // socket.on("disconnect", () => {
+    //     console.log("user disconnected:" + socket.id)
+    // })
   });
 
 // authorization/authentication middleware
@@ -110,6 +117,7 @@ app.get('/', isAuthenticated, (req, res) => {
 app.use("/matches", isAuthenticated, matchesRouter);
 app.use("/profiles", isAuthenticated, usersRouter);
 app.use("/quizzes", isAuthenticated, quizRouter);
+app.use("/msg", isAuthenticated, chatRouter);
 
 // listener
 const PORT = process.env.PORT;
